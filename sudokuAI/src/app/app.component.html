@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML Backgorund Color</title>
+</head>
+
+<body>
+    <div>
+        <h1>Angular HTML Table Example</h1>
+        <h3 class="questions">please enter the width of the sudoku game: </h3><input type="number" value="0" min="1" max="9" id="width" class="questionsInput" (change)="setWidth($event)" />
+        <h3 class="questions">please enter the height of the sudoku game: </h3><input type="number" value="0" min="1" max="9" id="height" class="questionsInput" (change)="setHeight($event)" />
+
+        <br/>
+        <input type="button" value="submit sudoku" (click)="setItemsArray()" id="submitBtn" />
+        <input type="button" value="solve" (click)="solve()" id="solveBtn" />
+
+        <table>
+            <thead>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of ItemsArray; let i = index">
+                    <th></th>
+                    <

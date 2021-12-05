@@ -1,0 +1,31 @@
+td {
+    padding-right: 14px;
+    padding-bottom: 12px;
+}
+
+table {
+    margin-top: 80px;
+    margin-left: 670px;
+}
+
+h1 {
+    margin-left: 670px;
+}
+
+.digit {
+    width: 30px;
+    height: 30px;
+}
+
+.questions {
+    margin-left: 720px;
+}
+
+.questionsInput {
+    margin-left: 900px;
+}
+
+#submitBtn {
+    margin-left: 800px;
+    margin-top: 50px;
+}

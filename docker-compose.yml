@@ -1,0 +1,19 @@
+version: "3"
+services:
+  position-crud:
+    image: positions-service:latest
+    build: .
+    environment: 
+        APPLICATION_PORT: '5000'
+        MONGO_CONNECTION_STRING: 'mongodb://mongo:27017/positions'
+    ports:
+      - "5000:5000"
+    depends_on:
+      - "mongo"
+  
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: on-failure

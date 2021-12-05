@@ -72,55 +72,60 @@ export class AppComponent {
     this.ItemsArray = this.getAllData();
 
     const voc = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let needSolving = 100;
+    let prevNeedSolveing = 100;
     //check line
-    for (let i = 0; i < this.height; i++) {
-      for (let j = 0; j < this.width; j++) {
-        if (this.ItemsArray[i][j] == 0) {
-          let tempvoc = [...voc];
-          for (let k = 0; k < this.width; k++) {
-            tempvoc.forEach((num) => {
-              if (this.ItemsArray[i][k] == num) {
-                tempvoc = this.removeItemFromArray(tempvoc, num);
-              }
-            });
-          }
-
-          //check row
-          for (let k = 0; k < this.width; k++) {
-            tempvoc.forEach((num) => {
-              if (this.ItemsArray[k][j] == num) {
-                tempvoc = this.removeItemFromArray(tempvoc, num);
-              }
-            });
-          }
-
-          //check 3x3 box
-          let searchAreaLine = [0, 0];
-          if (i < 3) searchAreaLine = [0, 3];
-          else if (i >= 3 && i < 6) searchAreaLine = [3, 6];
-          else searchAreaLine = [6, 8];
-
-          let searchAreaRow = [0, 0];
-          if (j < 3) searchAreaRow = [0, 3];
-          else if (j >= 3 && j < 6) searchAreaRow = [3, 6];
-          else searchAreaRow = [6, 8];
-
-          for (let i = searchAreaLine[0]; i < searchAreaLine[1]; i++) {
-            for (let j = searchAreaRow[0]; j < searchAreaRow[1]; j++) {
+    while (needSolving > 0 || needSolving === prevNeedSolveing) {
+      prevNeedSolveing = needSolving;
+      needSolving = 0;
+      for (let i = 0; i < this.height; i++) {
+        for (let j = 0; j < this.width; j++) {
+          if (this.ItemsArray[i][j] == 0) {
+            needSolving++;
+            let tempvoc = [...voc];
+            for (let k = 0; k < this.width; k++) {
               tempvoc.forEach((num) => {
-                if (this.ItemsArray[i][j] == num) {
+                if (this.ItemsArray[i][k] == num) {
                   tempvoc = this.removeItemFromArray(tempvoc, num);
                 }
               });
             }
-          }
 
-          console.log(i, j, tempvoc);
+            //check row
+            for (let k = 0; k < this.width; k++) {
+              tempvoc.forEach((num) => {
+                if (this.ItemsArray[k][j] == num) {
+                  tempvoc = this.removeItemFromArray(tempvoc, num);
+                }
+              });
+            }
 
-          if (tempvoc.length === 1) {
-            console.log('yay found' + tempvoc[0]);
+            //check 3x3 box
+            let searchAreaLine = [0, 0];
+            if (i < 3) searchAreaLine = [0, 3];
+            else if (i >= 3 && i < 6) searchAreaLine = [3, 6];
+            else searchAreaLine = [6, 8];
 
-            this.ItemsArray[i][j] = tempvoc[0];
+            let searchAreaRow = [0, 0];
+            if (j < 3) searchAreaRow = [0, 3];
+            else if (j >= 3 && j < 6) searchAreaRow = [3, 6];
+            else searchAreaRow = [6, 8];
+
+            for (let i = searchAreaLine[0]; i < searchAreaLine[1]; i++) {
+              for (let j = searchAreaRow[0]; j < searchAreaRow[1]; j++) {
+                tempvoc.forEach((num) => {
+                  if (this.ItemsArray[i][j] == num) {
+                    tempvoc = this.removeItemFromArray(tempvoc, num);
+                  }
+                });
+              }
+            }
+
+            if (tempvoc.length === 1) {
+              console.log('yay found' + tempvoc[0]);
+
+              this.ItemsArray[i][j] = tempvoc[0];
+            }
           }
         }
       }
